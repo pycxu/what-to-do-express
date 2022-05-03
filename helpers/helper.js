@@ -19,16 +19,27 @@ function mustBeInArray(array, id) {
     resolve(row);
   });
 }
-function writeJSONFile(filename, content) {
-  fs.writeFileSync(filename, JSON.stringify(content), 'utf8', (err) => {
+
+function readJJONFile(filename) {
+  try {
+    return JSON.parse(fs.readFileSync(filename, 'utf8'))
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function writeJSONFile(filename, content) { // spacing level = 2 for pretty-printing
+  fs.writeFileSync(filename, JSON.stringify(content, null, 2), 'utf8', (err) => {
     if (err) {
       console.log(err);
     }
   });
 }
+
 module.exports = {
   getNewId,
   newDate,
   mustBeInArray,
+  readJJONFile,
   writeJSONFile,
 };

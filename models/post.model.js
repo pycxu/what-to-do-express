@@ -1,6 +1,9 @@
 const filename = './posts.json';
-let posts = require(filename);
 const helper = require('../helpers/helper.js');
+//let posts = require(filename);
+// avoid require(filename) which performs cached read
+let posts = helper.readJJONFile(filename); 
+
 function getPosts() {
   return new Promise((resolve, reject) => {
     if (posts.length === 0) {
@@ -56,7 +59,8 @@ function deletePost(id) {
     helper
       .mustBeInArray(posts, id)
       .then(() => {
-        posts = posts.filter((p) => p.id !== id);
+        //posts = posts.filter((p) => p.id !== id); this does not work and I am not sure why
+        posts.splice(posts.findIndex((p) => p.id == id));
         helper.writeJSONFile(filename, posts);
         resolve();
       })
