@@ -20,7 +20,18 @@ router.get('/', async (req, res) => {
 
 /* Get todo item by id */
 // Task: Create the endpoint to return a selected todo item.
-router.get('/:id', m.mustBeInteger, async (req, res) => {});
+router.get('/:id', m.mustBeInteger, async (req, res) => {
+  await post
+    .getPost(req.params.id)
+    .then((p) => res.json(p))
+    .catch((err) => {
+      if (err.status) {
+        res.status(err.status).json({ message: err.message });
+      } else {
+        res.status(500).json({ message: err.message });
+      }
+    });
+});
 
 /* Insert a new todo item */
 // Task: Create the endpoint to store a new todo item locally on the server.

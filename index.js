@@ -1,6 +1,8 @@
 // Import packages
 const express = require('express');
 const morgan = require('morgan');
+// Load env variable
+require('dotenv').config();
 // App
 const app = express();
 // Morgan
@@ -11,5 +13,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use(require('./routes/index.routes'));
 
 // Starting server
-// Task: Refactor port number to be fetched from environment
-app.listen('2022');
+app.listen(process.env.PORT);
