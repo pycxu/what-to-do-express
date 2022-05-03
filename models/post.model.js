@@ -2,7 +2,7 @@ const filename = './posts.json';
 const helper = require('../helpers/helper.js');
 
 // avoid require(filename) which performs cached read
-let posts = helper.readJJONFile(filename); 
+let posts = helper.readJSONFile(filename); 
 
 const getPosts = () => {
   return new Promise((resolve, reject) => {

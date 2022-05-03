@@ -33,7 +33,7 @@ const writeJSONFile = (filename, content) => { // spacing level = 2 for pretty-p
 }
 
 // read json file
-const readJJONFile = (filename) => {
+const readJSONFile = (filename) => {
   try {
     return JSON.parse(fs.readFileSync(filename, 'utf8'))
   } catch (err) {
@@ -69,7 +69,7 @@ module.exports = {
   getNewId,
   mustBeInArray,
   writeJSONFile,
-  readJJONFile,
+  readJSONFile,
   mustNotInArray,
   errorResponse
 };

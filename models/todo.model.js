@@ -2,7 +2,7 @@ const filename = './todos.json';
 const helper = require('../helpers/helper');
 
 // avoid require(filename) which performs cached read
-let todos = helper.readJJONFile(filename);
+let todos = helper.readJSONFile(filename);
 
 const getTodos = () => {
     return new Promise((resolve, reject) => {
