@@ -1,10 +1,10 @@
 const filename = './posts.json';
 const helper = require('../helpers/helper.js');
-//let posts = require(filename);
+
 // avoid require(filename) which performs cached read
 let posts = helper.readJJONFile(filename); 
 
-function getPosts() {
+const getPosts = () => {
   return new Promise((resolve, reject) => {
     if (posts.length === 0) {
       reject({
@@ -15,7 +15,7 @@ function getPosts() {
     resolve(posts);
   });
 }
-function getPost(id) {
+const getPost = (id) => {
   return new Promise((resolve, reject) => {
     helper
       .mustBeInArray(posts, id)
@@ -23,7 +23,7 @@ function getPost(id) {
       .catch((err) => reject(err));
   });
 }
-function insertPost(newPost) {
+const insertPost = (newPost) => {
   return new Promise((resolve, reject) => {
     const id = { id: helper.getNewId(posts) };
     const date = {
@@ -36,7 +36,7 @@ function insertPost(newPost) {
     resolve(newPost);
   });
 }
-function updatePost(id, newPost) {
+const updatePost = (id, newPost) => {
   return new Promise((resolve, reject) => {
     helper
       .mustBeInArray(posts, id)
@@ -54,13 +54,14 @@ function updatePost(id, newPost) {
       .catch((err) => reject(err));
   });
 }
-function deletePost(id) {
+const deletePost = (id) => {
   return new Promise((resolve, reject) => {
     helper
       .mustBeInArray(posts, id)
       .then(() => {
         //posts = posts.filter((p) => p.id !== id); this does not work and I am not sure why
-        posts.splice(posts.findIndex((p) => p.id == id));
+        const index = posts.findIndex((p) => p.id == id)
+        posts.splice(index, 1);
         helper.writeJSONFile(filename, posts);
         resolve();
       })
